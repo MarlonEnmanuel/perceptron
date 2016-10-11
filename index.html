@@ -128,12 +128,31 @@
 						</a>
 					</div>
 					<div class="col s5 offset-s2">
-						<h5>Ecuación de Recta</h5>
+						<h5>
+							Ecuación de Recta
+							<a id="app-nuevosPesos" class="right" onclick="Perceptron.nuevosPesos();return false;" href="#" title="Nuevos Pesos aleatoreos">
+								<i class="material-icons right">refresh</i>
+							</a>
+						</h5>
 						<h5 class="center-align" id="app-recta">
 							<span class="teal lighten-5" id="app-recta-w1"> 0.34 </span> x +
 							<span class="teal lighten-5" id="app-recta-w2"> -5.43 </span> y +
 							<span class="teal lighten-5" id="app-recta-w3"> 2.34 </span> = 0
 						</h5>
+						<br>
+						<div class="divider"></div>
+						<br>
+						<a id="app-entrenar" class="waves-effect waves-light btn right" onclick="Perceptron.entrenar();return false;" href="#">
+							<i class="material-icons left">trending_up</i>
+							Entrenar
+						</a>
+						<br><br><br>
+						<div class="divider"></div>
+						<br><br>
+						<a id="app-consultar" class="waves-effect waves-light btn right" onclick="Perceptron.consultar();return false;" href="#">
+							<i class="material-icons left">lightbulb_outline</i>
+							Consultar Coordenadas
+						</a>
 					</div>
 				</div>
 			</div>
@@ -145,7 +164,7 @@
 		<div class="container">
 			<div class="row white-text">
 				<div class="col s6">
-					<h5>Aplicación Perceptrón</h5>
+					<h5>Aplicación Perceptrón v1</h5>
 					<p>Aplicación hecha para el curso de Inteligencia Artificial a cargo de Ing. Gavilo Loyaga, como práctica del tema Redes Neuronales.</p>
 				</div>
 				<div class="col s6 right-align">

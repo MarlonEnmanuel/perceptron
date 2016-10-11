@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Perceptrón</title>
+	<link rel="stylesheet" href="css/materialize.min.css">
+	<style type="text/css">
+		body {
+			display: flex;
+			min-height: 100vh;
+			flex-direction: column;
+		}
+		main {
+			flex: 1 0 auto;
+		}
+		@font-face{
+		    font-family: 'Material Icons';
+		    font-style: normal;
+		    font-weight: 400;
+		    src: local('Material Icons'), local('MaterialIcons-Regular'), url(fonts/MaterialIcons.woff2) format('woff2');
+		}
+		.material-icons{
+		    font-family: 'Material Icons';
+		    font-weight: normal;
+		    font-style: normal;
+		    font-size: 24px;
+		    line-height: 1;
+		    letter-spacing: normal;
+		    text-transform: none;
+		    display: inline-block;
+		    white-space: nowrap;
+		    word-wrap: normal;
+		    direction: ltr;
+		    -webkit-font-feature-settings: 'liga';
+		    -webkit-font-smoothing: antialiased;
+		}
+		.pointer {
+			cursor: pointer;
+		}
+		.opaque {
+			opacity: 0.2;
+		}
+		#app-muestras td{
+			padding: 12px 5px;
+		}
+		#app-muestras tr:hover a{
+			display: block;
+		}
+		.muestra-quitar{
+			padding: 0;
+			border-radius: 100%;
+			display: none;
+			height: 26px;
+			width: 26px;
+		}
+		.muestra-quitar i{
+			font-size: 16px;
+			font-weight: bold;
+			line-height: 0px;
+		}
+	</style>
+</head>
+<body>
+
+	<nav class="indigo">
+		<div class="container">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Perceptrón</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="#" onclick="Perceptron.restart()" title="Reiniciar"><i class="material-icons">refresh</i></a></li>
+					<li><a href="#" onclick="Perceptron.save()" title="Guardar"><i class="material-icons">save</i></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<main class="blue-grey-text text-darken-4">
+		<div class="container">
+			<br>
+			<div class="section">
+				<div class="row">
+					<div class="col s5">
+						<h5>Nombre del proyecto</h5>
+						<h6 id="app-nombre" class="pointer" onclick="Perceptron.editNombre()">Nuevo perceptrón</h6>
+					</div>
+					<div class="col s5 offset-s2">
+						<h5>Coeficiente de aprendizaje</h5>
+						<h6 id="app-razon" class="pointer" onclick="Perceptron.editRazon()">0.9</h6>
+					</div>
+				</div>
+			</div>
+			<div class="divider"></div>
+			<div class="section">
+				<div class="row">
+					<div class="col s5">
+						<h5>Muestras</h5>
+						<table class="centered bordered highlight">
+							<thead>
+								<tr>
+									<th data-field="x">Coord. X</th>
+									<th data-field="y">Coord. Y</th>
+									<th data-field="clase">Clase</td>
+									<th data-field="icon" width="40">
+										<a href="#" class="red-text" title="Quitar todo">
+											<i class="material-icons">delete_forever</i>
+										</a>
+									</td>
+								</tr>
+							</thead>
+							<tbody id="app-muestras">
+								<tr class="muestra">
+									<td class="muestra-x">2.3</td>
+									<td class="muestra-y">1.3</td>
+									<td class="muestra-clase">A</td>
+									<td>
+										<a class="waves-effect waves-light btn pointer muestra-quitar">
+											<i class="material-icons">clear</i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col s5 offset-s2">
+						<h5>Ecuación de Recta</h5>
+						<h5 class="center-align" id="app-recta">
+							<span class="opaque">[</span><span id="app-recta-w1">0.34</span><span class="opaque">]</span>x +
+							<span class="opaque">[</span><span id="app-recta-w2">-5.43</span><span class="opaque">]</span>y +
+							<span class="opaque">[</span><span id="app-recta-w3">2.34</span><span class="opaque">]</span> = 0
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="teal">
+		<br>
+		<div class="container">
+			<div class="row white-text">
+				<div class="col s6">
+					<h5>Aplicación Perceptrón</h5>
+					<p>Aplicación hecha para el curso de Inteligencia Artificial a cargo de Ing. Gavilo Loyaga, como práctica del tema Redes Neuronales.</p>
+				</div>
+				<div class="col s6 right-align">
+					<h5>Alumnos</h5>
+					<ul>
+						<li>Estela Espinoza Jacky</li>
+						<li>Mendoza Cabrera Luis Enrique</li>
+						<li>Montalvo FLores Marlon Enmanuel</li>
+						<li>Montenegro Risco Diana Carolina</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row blue-text text-lighten-5">
+				Escuela Profesional de Ingeniería de Sistemas de la Universidad Nacional Pedro Ruiz Gallo
+			</div>
+		</div>
+	</footer>
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+		$(document).ready(function() {
+			if( typeof jQuery == 'undefined' ||
+				typeof Materialize == 'undefined' ||
+				typeof window.Perceptron == 'undefined' ) 
+				window.alert('La aplicación no puede iniciar porque se detectaron archivos faltantes o corruptos!');
+			window.Perceptron.init();
+		});
+	</script>
+</body>
+</html>

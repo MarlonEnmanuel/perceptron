@@ -197,7 +197,7 @@ window.Perceptron = {
 		var self = this;
 
 		if(!self.data.entrenado){
-			Materialize.toast('Debe entrenar primero');
+			Materialize.toast('Debe entrenar primero', 3000);
 			return;
 		}
 
